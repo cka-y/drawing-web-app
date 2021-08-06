@@ -1,0 +1,62 @@
+<ng-container *ngIf="exporter.exportState === 0">
+  <div class="section-header">Exporter le dessin</div>
+  <br />
+  <canvas #baseCanvasCopy [height]="drawingService.canvasHeight" [width]="drawingService.canvasWidth" style="display: none"></canvas>
+  <div>
+    <img [src]="exporter.imgSrc" id="imagePreview" alt="Prévisualisation du dessin" [height]="imgDimension" [width]="imgDimension" />
+    <form class="modal-content">
+      <div>
+        <mat-form-field style="display: inline-block">
+          <mat-label>Nom du dessin</mat-label>
+          <input type="text" matInput required [(ngModel)]="exporter.drawingName" name="drawingName" />
+        </mat-form-field>
+        <span class="subtitle"> .{{ exporter.format }}</span>
+      </div>
+      <label class="padding-right subtitle">Format: </label>
+      <mat-radio-group [(ngModel)]="exporter.format" name="format" class="subtitle">
+        <mat-radio-button value="jpeg" class="padding-right"> .JPEG </mat-radio-button>
+        <mat-radio-button value="png" class="padding-right"> .PNG </mat-radio-button>
+      </mat-radio-group>
+      <br />
+      <div id="filters-container">
+        <label class="block-display subtitle">Filtre appliqué au dessin: </label>
+        <mat-radio-group [(ngModel)]="exporter.filter" name="filter" class="subtitle" (ngModelChange)="exporter.changeFilter($event)">
+          <mat-radio-button *ngFor="let filter_i of exporter.filterKeys" [value]="filter_i" class="block-display">
+            {{ filter_i }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </form>
+  </div>
+  <div style="width: 100%; display: flex; justify-content: space-around">
+    <button
+      id="confirm-button"
+      mat-raised-button
+      matTooltip="Le nom du dessin n'est pas spécifié."
+      matTooltipPosition="right"
+      [style.cursor]="exporter.isNameDefined() ? 'pointer': 'not-allowed'"
+      [matTooltipDisabled]="exporter.isNameDefined()"
+    >
+      <mat-icon>file_download</mat-icon> Télécharger le dessin
+      <a
+        style="position: absolute; right: 0; width: 100%; height: 100%; z-index: 12"
+        *ngIf="exporter.isNameDefined()"
+        [download]="exporter.drawingName + '.' + exporter.format"
+        [href]="exporter.imgSrc"
+        (click)="exporter.updateImage()"
+      ></a>
+    </button>
+    <button
+      mat-raised-button
+      matTooltip="Cliquez pour exporter le dessin sur Imgur."
+      matTooltipPosition="right"
+      (click)="exporter.uploadImage()"
+      style="margin: 30px 10px 0 0; width: 250px; background-color: #34568B; color: white"
+    >
+      <mat-icon>file_upload</mat-icon> Téléverser sur imgur
+    </button>
+  </div>
+</ng-container>
+<ng-container *ngIf="exporter.exportState === 2">
+  <span><mat-icon id="check" style="vertical-align: middle; color: green">check_circle</mat-icon> Le dessin a été correctement sauvegardé sur le Imgur au lien <a [href]="exporter.imgurLink" target="_blank">{{exporter.imgurLink}}</a>.</span>
+</ng-container>

@@ -1,0 +1,11 @@
+export const OUT_OF_CANVAS_FLAG = 'out';
+export const CONFIRMATION_DISPLAY_DURATION = 2000;
+export const TARGET_PIXEL_DISTANCE = 20;
+export const DEFAULT_JUNCTION_DIAMETER = 5;
+export const DEFAULT_JUNCTION_TYPE = 'normal';
+export const LINE_MIN_NB_POINTS = 2;
+export const STAMP_MIN_FONT_SIZE = 20;
+export const STAMP_ALT_SCROLL_ANGLE_DEC = 14;
+export const STAMP_MAX_ROTATION_ANGLE = 360;
+export const MS_PER_SEC = 1000;
+export const INIT_SPRAY_SIZE = 10;

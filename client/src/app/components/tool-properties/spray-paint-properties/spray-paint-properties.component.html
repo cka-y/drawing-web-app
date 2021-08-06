@@ -1,0 +1,31 @@
+<form style="position: relative">
+  <mat-icon style="vertical-align: middle">bloodtype</mat-icon> Taille des gouttes
+    <mat-slider
+        name="drop-size"
+        thumbLabel
+        tickInterval="0.5"
+        min="1"
+        max="5"
+        step="0.5"
+        [(ngModel)]="sprayPaintService.sprayCan.dropSize"
+    ></mat-slider>
+    <div class="property-value">{{ sprayPaintService.sprayCan.dropSize }} px</div>
+</form>
+<form style="position: relative">
+  <mat-icon style="vertical-align: middle">panorama_fish_eye</mat-icon> Diamètre du jet
+    <mat-slider name="drop-size" thumbLabel tickInterval="1" min="10" max="100" [(ngModel)]="sprayPaintService.spraySize"></mat-slider>
+    <div class="property-value">{{ sprayPaintService.spraySize }} px</div>
+</form>
+<form style="position: relative">
+  <mat-icon style="vertical-align: middle">timer</mat-icon> Émissions par sec
+    <mat-slider
+        name="emission-per-second"
+        thumbLabel
+        tickInterval="1"
+        step="50"
+        [min]="sprayPaintService.minEmission"
+        max="1000"
+        [(ngModel)]="sprayPaintService.emissionPerSec"
+    ></mat-slider>
+    <div class="property-value">{{ sprayPaintService.emissionPerSec }}</div>
+</form>

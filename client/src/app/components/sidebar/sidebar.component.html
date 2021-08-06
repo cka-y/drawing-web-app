@@ -1,0 +1,117 @@
+<!-- Sidebar's tool selector -->
+<div class="container icon-container">
+  <br />
+  <div *ngFor="let tool of toolManager.tools">
+    <div
+      *ngIf="tool.icon !== undefined"
+      [matTooltip]="tool.description"
+      matTooltipPosition="right"
+      (click)="onClick($event, tool)"
+      [class]="tool === toolManager.currentTool ? 'selected-tool tool-selector' : 'tool-selector'"
+    >
+      <div>
+        <fa-icon [icon]="tool.icon"></fa-icon>
+      </div>
+    </div>
+  </div>
+  <div class="tool-selector color-cont" style="position: relative; width: 47px; height: 44px; cursor: auto; margin-top: 20px">
+    <div #primaryColor class="color-prev primary" style="z-index: 3" matTooltip="Cliquer pour modifier la couleur primaire" matTooltipPosition="right" [style.backgroundColor]="colorService.getColor(primaryLevel)" (click)="secondaryColor.style.zIndex = '1'; primaryColor.style.zIndex = '2'; displayPalette(primaryLevel)">
+    </div>
+    <div #secondaryColor matTooltip="Cliquer pour modifier la couleur secondaire" matTooltipPosition="right" class="color-prev secondary" [style.backgroundColor]="colorService.getColor(secondaryLevel)" (click)="secondaryColor.style.zIndex = '2'; primaryColor.style.zIndex = '1'; displayPalette(secondaryLevel)"></div>
+    <div matTooltip="Inverser les couleurs" matTooltipPosition="right" class="tool-selector" style="margin:0; padding:0; position: absolute; top: 0; left: 47px; font-size: large" (click)="$event.preventDefault(); colorService.swap(); toolManager.currentTool.redrawToolPreview(colorService.getColor(colorService.currentToolColorProperty.strokeColor), colorService.getColor(colorService.currentToolColorProperty.fillColor))">
+      <fa-icon [icon]="swapIcon" style=" font-size: large"></fa-icon>
+    </div>
+  </div>
+  <br />
+  <div class="bottom-tools">
+    <div matTooltip="Créer un nouveau dessin (raccourci: Ctrl + O)" matTooltipPosition="right" class="tool-selector" (click)="shortcutManager.createNewDrawing()">
+      <mat-icon>add_box</mat-icon>
+    </div>
+    <div matTooltip="Sauvegarder le dessin sur le serveur (raccourci: Ctrl + S)" matTooltipPosition="right" class="tool-selector" (click)="shortcutManager.openSaveDrawing()">
+      <mat-icon>save</mat-icon>
+    </div>
+    <div matTooltip="Ouvrir le carousel de dessin (raccourci: Ctrl + G)" matTooltipPosition="right" class="tool-selector" (click)="modalService.onKeyDown('ctrl+KeyG')">
+      <mat-icon>view_carousel</mat-icon>
+    </div>
+    <div matTooltip="Exporter le dessin (raccourci: Ctrl + E)" matTooltipPosition="right" class="tool-selector" (click)="modalService.onKeyDown('ctrl+KeyE')">
+      <mat-icon>file_download</mat-icon>
+    </div>
+    <div matTooltip="Retour à la page principale" matTooltipPosition="right" class="tool-selector" routerLink="/main-page">
+      <mat-icon style="transform: rotate(180deg)">exit_to_app</mat-icon>
+    </div>
+  </div>
+</div>
+<!-- Sidebar's selected tool's properties -->
+<div class="container" id="properties-container">
+  <div class="tool-name">
+    <fa-icon [icon]="toolManager.currentTool.icon"></fa-icon> <br />
+    Outil {{ toolManager.currentTool.name }}
+  </div>
+  <ng-container [ngSwitch]="toolManager.currentTool.name">
+    <app-line-properties *ngSwitchCase="'Ligne'"></app-line-properties>
+    <app-rectangle-properties *ngSwitchCase="'Rectangle'"></app-rectangle-properties>
+    <app-eraser-properties *ngSwitchCase="'Efface'"></app-eraser-properties>
+    <app-ellipse-properties *ngSwitchCase="'Ellipse'"></app-ellipse-properties>
+    <app-spray-paint-properties *ngSwitchCase="'Aerosol'"> </app-spray-paint-properties>
+    <app-pencil-properties *ngSwitchCase="'Crayon'"></app-pencil-properties>
+    <app-stamps *ngSwitchCase="'Étampe'"></app-stamps>
+    <app-bucket-properties *ngSwitchCase="'Sceau de peinture'"></app-bucket-properties>
+    <app-selection-options *ngSwitchDefault></app-selection-options>
+  </ng-container>
+  <br />
+  <app-color-picker
+    [colorLevel]="primaryLevel"
+    [class]="colorPalettesDisplay[primaryLevel]"
+    (colorSelectionDone)="hideAllColorPalettes();
+    toolManager.currentTool.redrawToolPreview(colorService.getColor(colorService.currentToolColorProperty.strokeColor), colorService.getColor(colorService.currentToolColorProperty.fillColor))"
+  ></app-color-picker>
+  <app-color-picker
+    [colorLevel]="secondaryLevel"
+    [class]="colorPalettesDisplay[secondaryLevel]"
+    (colorSelectionDone)="hideAllColorPalettes();
+    toolManager.currentTool.redrawToolPreview(colorService.getColor(colorService.currentToolColorProperty.strokeColor), colorService.getColor(colorService.currentToolColorProperty.fillColor))"
+  ></app-color-picker>
+  <div class="bottom-tools">
+    <div style="display: block; border-top: 1px solid #101928; padding-bottom: 0" class="tool-name">
+      <mat-icon style=" vertical-align: middle; display: inline-block">palette</mat-icon> Couleurs
+    </div>
+    <div class="color-container">
+      <div class="last-colors">
+        <ng-container *ngFor="let color of colorService.lastColors.array">
+          <div
+            class="color-div"
+            [ngStyle]="{ backgroundColor: colorService.colorToString(color) }"
+            (click)="colorService.onColorClick($event, color);
+            toolManager.currentTool.redrawToolPreview(colorService.getColor(colorService.currentToolColorProperty.strokeColor), colorService.getColor(colorService.currentToolColorProperty.fillColor))"
+            (contextmenu)="colorService.onColorClick($event, color);
+            toolManager.currentTool.redrawToolPreview(colorService.getColor(colorService.currentToolColorProperty.strokeColor), colorService.getColor(colorService.currentToolColorProperty.fillColor))"
+            [matTooltip]="'Selectionner la couleur'"
+            matTooltipPosition="right"
+          ></div>
+        </ng-container>
+      </div>
+      <br>
+    </div>
+    <div class="app-tools">
+      <div style="display: flex; flex-direction: row; justify-content: space-evenly">
+        <app-undo-redo [taskInProgress]="toolManager.isToolBeingUsed()"></app-undo-redo>
+      </div>
+      <div style="display: flex; flex-direction: row; justify-content: space-evenly">
+        <app-grid-properties *ngIf="gridDisplayService.grid.isDisplayed && gridDisplayService.isPropertiesDisplayed"></app-grid-properties>
+        <button class="bottom-button" mat-icon-button matTooltip="Sélectionner tout le canvas (raccourci: Ctrl + A)" matTooltipPosition="right" (click)="shortcutManager.selectAll()">
+          <mat-icon>select_all</mat-icon>
+        </button>
+        <button class="bottom-button" mat-icon-button matTooltip="Coller le contenu du presse-papier" matTooltipPosition="right" [disabled]="clipboardService.clipboard === undefined || toolManager.isToolBeingUsed()" (click)="clipboardService.paste()">
+          <mat-icon>content_paste</mat-icon>
+        </button>
+        <button class="bottom-button" mat-icon-button
+          [matTooltip]="gridDisplayService.grid.isDisplayed? 'Retirer l\'affichage de la grille (raccourci: G)': 'Afficher la grille (raccourci: G)'"
+          matTooltipPosition="right"
+                [style.backgroundColor]="gridDisplayService.grid.isDisplayed ? '#dea527':''"
+          (click)="gridDisplayService.toggleGridDisplay(); gridDisplayService.isPropertiesDisplayed = gridDisplayService.grid.isDisplayed">
+          <mat-icon>grid_4x4</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

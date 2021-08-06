@@ -1,0 +1,35 @@
+<div
+    id="resize-preview"
+    [ngClass]="previewDisplay"
+    [ngStyle]="{ 'height.px': canvasResizer.previewCanvasDim.height, 'width.px': canvasResizer.previewCanvasDim.width }"
+>
+    <div
+        class="handler handler-bottom"
+        cdkDragLockAxis="y"
+        cdkDrag
+        (cdkDragStarted)="onCanvasResizeStart()"
+        (cdkDragMoved)="onCanvasResizing($event)"
+        (cdkDragEnded)="onCanvasResizeEnd()"
+        [cdkDragFreeDragPosition]="{ x: canvasResizer.previewCanvasDim.width / 2 - 15, y: canvasResizer.previewCanvasDim.height - 25 }"
+        [style.display]="toolManager.isToolBeingUsed() ? 'none' : ''"
+    ></div>
+    <div
+        class="handler handler-right"
+        cdkDragLockAxis="x"
+        cdkDrag
+        (cdkDragStarted)="onCanvasResizeStart()"
+        (cdkDragMoved)="onCanvasResizing($event)"
+        (cdkDragEnded)="onCanvasResizeEnd()"
+        [cdkDragFreeDragPosition]="{ x: canvasResizer.previewCanvasDim.width - 25, y: canvasResizer.previewCanvasDim.height / 2 - 15 }"
+        [style.display]="toolManager.isToolBeingUsed() ? 'none' : ''"
+    ></div>
+    <div
+        class="handler handler-bottom-right"
+        cdkDrag
+        (cdkDragStarted)="onCanvasResizeStart()"
+        (cdkDragMoved)="onCanvasResizing($event)"
+        (cdkDragEnded)="onCanvasResizeEnd()"
+        [cdkDragFreeDragPosition]="{ x: canvasResizer.previewCanvasDim.width - 25, y: canvasResizer.previewCanvasDim.height - 87 }"
+        [style.display]="toolManager.isToolBeingUsed() ? 'none' : ''"
+    ></div>
+</div>

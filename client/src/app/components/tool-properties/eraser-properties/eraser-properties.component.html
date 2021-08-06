@@ -1,0 +1,7 @@
+<form style="position: relative">
+    <mat-icon style="display:inline-block; vertical-align: middle">stop</mat-icon> Taille de l'efface
+    <mat-slider name="eraser-size" thumbLabel tickInterval="1" min="5" max="100" [(ngModel)]="eraserService.eraser.size" (ngModelChange)="drawPreview()"></mat-slider>
+    <div class="property-value">{{ eraserService.eraser.size }} px</div>
+</form>
+Aperçu de l'efface
+<canvas class="tool-preview-drawing" #previewCanvas [height]="canvasSize + 20" [width]="2*canvasSize"></canvas>

@@ -1,0 +1,7 @@
+$buttonColor: #eae7dc;
+button{
+  margin: 2px
+}
+button:hover:not(:disabled){
+  background-color: darken($buttonColor, 20);
+}

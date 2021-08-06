@@ -1,0 +1,223 @@
+$buttonColor: #eae7dc;
+$textColor: #dea527;
+$baseColor: black;
+$amount: 10;
+$backgroundColor: #101928;
+$emphasis: #34568B;
+
+.color-prev{
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  border: 1px solid $textColor;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.color-prev:hover{
+  border-color: darken($textColor, 2*$amount);
+}
+.color-prev.primary{
+  top:0;
+  left: 4px;
+}
+.color-prev.secondary{
+  top:22px;
+  left: 25px;
+}
+.container {
+  height: 100%;
+  min-height: 98vh;
+  background-color: $backgroundColor;
+  padding: 12px 0;
+  color: $textColor;
+  float: left;
+}
+fa-icon {
+  font-size: 20px;
+}
+
+#properties-container {
+  border-right: 1px solid;
+  color: darken($backgroundColor, 20);
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+}
+
+.container ~ .container {
+  width: 200px;
+  background-color: $buttonColor;
+  justify-content: center;
+  color: darken($backgroundColor, $amount);
+  padding: 12px;
+}
+.container.icon-container{
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 10px 0;
+}
+.bottom-tools{
+  padding-top: 12px;
+  margin-top: auto;
+  position: relative;
+}
+.tool-selector.selected-tool {
+  background-color: $buttonColor;
+  color: $baseColor;
+  border-left: 10px solid $backgroundColor;
+}
+
+mat-slider {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+div.tool-selector {
+  cursor: pointer;
+  background-color: inherit;
+  height: 20px;
+  margin: 0;
+  padding: 12px;
+  border: none;
+  color: $textColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+}
+
+div.tool-selector:hover:not(.selected-tool):not(.color-cont),
+button:hover:not(.bottom-button) {
+  background-color: darken($backgroundColor, $amount);
+}
+
+.tool-name{
+  color: $emphasis;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 15px 0 15px 0;
+}
+select,
+button:not(.bottom-button) {
+  background-color: $emphasis;
+  color: white;
+  overflow: hidden;
+  border: none;
+  width: 100%;
+  height: 30px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.color-div {
+  width: 25px;
+  height: 25px;
+  border-radius: 25%;
+  border: darken($backgroundColor, 50) solid 1px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  float: left;
+  cursor: pointer;
+  margin: 2px;
+}
+.last-colors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+app-color-picker {
+  display: block;
+  position: absolute;
+  left: 80px;
+  top: 40px;
+  z-index: 20;
+  border-radius: 10%;
+  background-color: lighten($baseColor, $amount);
+}
+
+.bottom-button{
+  margin: 2px;
+}
+.bottom-button:hover{
+  background-color: darken($buttonColor, 20);
+}
+app-grid-properties {
+  border-radius: 20%;
+  display: block;
+  position: absolute;
+  left: 215px;
+  top: -50px;
+  z-index: 4;
+  background-color: lighten($baseColor, $amount);
+}
+
+::ng-deep .mat-accent .mat-slider-thumb,
+::ng-deep .mat-accent .mat-slider-thumb-label,
+::ng-deep .mat-accent .mat-slider-track-fill {
+  background-color: $emphasis;
+}
+
+.color-container {
+  border-bottom: $backgroundColor solid 1px;
+  padding: 10px;
+  display: flex;
+  text-align: center;
+}
+
+.tool-preview-drawing{
+  border: 1px solid $backgroundColor;
+  //border-radius: 25%;
+  margin-top: 2px;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+.block {
+  display: block;
+}
+.hide {
+  display: none;
+}
+
+.not-visible {
+  visibility: hidden;
+}
+
+.selected-trace{
+  transition: all ease-in-out 0.5s;
+  cursor: pointer;
+  background-color: $textColor;
+  border-radius: 25%;
+  height: 50px;
+  width: 50px;
+}
+mat-icon.trace-type {
+  font-size: 50px;
+  display: inline;
+}
+.trace{
+  cursor: pointer;
+  transition: all ease-in-out 0.25s;
+  height: 50px;
+  width: 50px;
+}
+.trace:hover{
+  background-color: darken($buttonColor, $amount);
+}
+
+.app-tools{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  color: $emphasis;
+  margin-top: 10px;
+  padding: 10px 0;
+  justify-self: stretch;
+}

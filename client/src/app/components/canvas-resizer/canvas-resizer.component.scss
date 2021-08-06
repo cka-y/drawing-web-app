@@ -1,0 +1,38 @@
+$backgroundColor: #9f7a45;
+.handler {
+    position: relative;
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    pointer-events: all;
+}
+
+.handler-right {
+    cursor: e-resize;
+    border-right: 2px solid $backgroundColor;
+}
+
+.handler-bottom {
+    cursor: n-resize;
+    border-bottom: 2px solid $backgroundColor;
+}
+
+.handler-bottom-right {
+    cursor: nw-resize;
+    border-right: 2px solid $backgroundColor;
+    border-bottom: 2px solid $backgroundColor;
+}
+
+#resize-preview {
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+.display {
+    border: 2px dotted $backgroundColor;
+}
+.hide {
+    border: none;
+}

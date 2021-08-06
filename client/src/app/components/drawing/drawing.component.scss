@@ -1,0 +1,55 @@
+$baseWidth: 1000px;
+$baseHeight: 700px;
+canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+.crosshair-cursor {
+    cursor: crosshair;
+}
+.no-cursor {
+    cursor: none;
+}
+#background {
+    z-index: 2;
+}
+
+#canvas-container {
+    position: relative;
+}
+
+.eraserCursor {
+    border: 1px solid black;
+    position: absolute;
+    background-color: white;
+    pointer-events: none;
+}
+
+app-canvas-resizer {
+    z-index: 3;
+    width: 100%;
+}
+
+[class|='handler'] {
+    position: absolute;
+    z-index: 2;
+    width: 45px;
+    height: 45px;
+    margin: 0;
+    background-color: gray;
+    border-radius: 50%;
+}
+
+.handler-right {
+    cursor: e-resize;
+}
+
+.handler-bottom {
+    cursor: n-resize;
+}
+
+.handler-bottom-right {
+    cursor: nw-resize;
+}

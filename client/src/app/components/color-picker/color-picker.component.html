@@ -1,0 +1,53 @@
+<!--Code inspired by Lukas Marx "Creating a Color Picker Component with Angular" at https://malcoded.com/posts/angular-color-picker/ -->
+<div class="tool-name">
+  Couleur {{colorLevel === 0 ? ' primaire' : ' secondaire'}}
+</div>
+<div style="display: inline-block">
+    <app-color-palette [hue]="hue1" (color)="onColorPaletteChange($event)"></app-color-palette>
+    <app-color-slider (color)="hue1 = $event"></app-color-slider>
+</div>
+<div style="text-align: left; margin-top: 15px; position:relative;">
+  <mat-icon style="display:inline-block; vertical-align: middle">opacity</mat-icon> Opacité de la couleur
+  <div class="property-value">{{ (colorOpacity * 100).toFixed() }}%</div>
+  <div class="opacity-slider">
+    <mat-slider name="opacity" thumbLabel [step]="tickInterval" [min]="min" [max]="max" [(ngModel)]="colorOpacity"></mat-slider>
+  </div>
+  <div class="color-preview" [ngStyle]="{ backgroundColor: printColor(getRgbaColor()) }"></div>
+</div>
+<div class="rgb-wrapper">
+    <div class="rgb-input">
+        R<br /><input
+            type="text"
+            [(ngModel)]="rColorValue"
+            [class]="inputValidity[0]"
+            (ngModelChange)="onColorInputChange($event, 0)"
+            maxlength="2"
+            style="width: 40px"
+        />
+    </div>
+    <div class="rgb-input">
+        G<br /><input
+            type="text"
+            [(ngModel)]="gColorValue"
+            [class]="inputValidity[1]"
+            (ngModelChange)="onColorInputChange($event, 1)"
+            maxlength="2"
+            style="width: 40px"
+        />
+    </div>
+    <div class="rgb-input">
+        B<br /><input
+            type="text"
+            [(ngModel)]="bColorValue"
+            [class]="inputValidity[2]"
+            (ngModelChange)="onColorInputChange($event, 2)"
+            maxlength="2"
+            style="width: 40px"
+        />
+    </div>
+</div>
+<div style="display: flex; width: 100%; justify-content: space-around">
+  <button mat-raised-button (click)="setInputColor()" [disabled]="!validateColor()" [ngStyle]="{ cursor: validateColor() ? 'pointer' : 'not-allowed', width: '100px' }">Confirmer</button>
+  <button mat-raised-button (click)="colorSelectionDone.emit()" style="cursor: pointer; width:100px;">Annuler</button>
+</div>
+

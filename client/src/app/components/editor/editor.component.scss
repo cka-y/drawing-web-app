@@ -1,0 +1,22 @@
+$backgroundColor: #eae7dc;
+$buttonColor: #eae7dc;
+$textColor: white;
+$baseColor: black;
+.container {
+    height: 100%;
+    background-color: $backgroundColor;
+    display: flex;
+    overflow: auto;
+    width: 100%;
+}
+
+.drawing-container {
+    overflow: auto;
+    flex: 1 1 auto;
+}
+
+.drawing {
+    display: grid;
+    width: min-content;
+    outline: none;
+}

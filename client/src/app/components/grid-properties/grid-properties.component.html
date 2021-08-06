@@ -1,0 +1,20 @@
+<div style="width:250px; padding: 10px; margin: 5px">
+  <div class="tool-name text-color">
+    Options de la grille
+  </div>
+  <form style="position: relative">
+    <mat-icon style="display:inline-block; vertical-align: middle">opacity</mat-icon> Opacité des lignes
+    <div class="opacity-slider">
+      <mat-slider style="width: 100%;" name="squareOpacity" thumbLabel tickInterval="0.05" [min]="minOpacity" [max]="maxOpacity" step="0.05" [(ngModel)]="gridDisplayService.grid.opacity" (ngModelChange)="gridDisplayService.displayGrid()"></mat-slider>
+    </div>
+    <div class="property-value">{{(gridDisplayService.grid.opacity * 100).toFixed()}}%</div>
+  </form>
+  <form style="position: relative">
+    <mat-icon style="display:inline-block; vertical-align: middle">crop_square</mat-icon> Largeur des carrés
+    <div class="opacity-slider">
+      <mat-slider style="width: 100%;" name="squareSize" thumbLabel tickInterval="1" [min]="minSquareSize" [max]="maxSquareSize" step="5" [(ngModel)]="gridDisplayService.grid.size" (ngModelChange)="gridDisplayService.displayGrid()"></mat-slider>
+    </div>
+    <div class="property-value">{{gridDisplayService.grid.size}} px</div>
+  </form>
+  <button mat-button (click)="gridDisplayService.isPropertiesDisplayed = false">Fermer</button>
+</div>

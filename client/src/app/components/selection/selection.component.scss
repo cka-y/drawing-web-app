@@ -1,0 +1,13 @@
+.selection-box-preview {
+    border: dotted 1px red;
+    display: block;
+    position: absolute;
+    cursor: move;
+    z-index: 8;
+    background-color: transparent;
+}
+
+.selection-canvas {
+    position: absolute;
+    visibility: hidden;
+}

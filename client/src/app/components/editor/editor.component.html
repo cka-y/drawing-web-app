@@ -1,0 +1,8 @@
+<div class="container">
+    <app-sidebar></app-sidebar>
+    <div class="drawing-container">
+        <app-drawing class="drawing" tabindex="0" [canvasDimensions]="canvasResizer.canvasDim"></app-drawing>
+        <app-canvas-resizer></app-canvas-resizer>
+        <app-selection style="width: 100%; height: 100%; display: block; position: relative" *ngIf="selector.selectionInProgress"></app-selection>
+    </div>
+</div>

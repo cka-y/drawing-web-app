@@ -1,0 +1,3 @@
+<app-line-width-property [(lineWidth)]="pencilService.lineWidth" (lineWidthChange)="drawPreview()"></app-line-width-property>
+Aperçu du tracé de crayon
+<canvas class="tool-preview-drawing" #previewCanvas [height]="canvasSize" [width]="2*canvasSize"></canvas>

@@ -1,0 +1,61 @@
+<div class="section-header">Carrousel de dessin</div>
+<br />
+<ng-container id="onServerSaving" *ngIf="waitingForData; else dataDisplay">
+    <mat-spinner style="margin: 0 auto"></mat-spinner>
+</ng-container>
+<ng-template #dataDisplay>
+    <ng-container *ngIf="filteredDrawings.length > 0; else noDrawing">
+        <div class="wrapper">
+            <a class="prev" (click)="backward()">&#10094;</a>
+            <ng-container *ngFor="let drawing of displayDrawings">
+                <div *ngIf="getPosition(drawing) === 'center'; else peripheral" style="position: relative; z-index: 2">
+                    <img [src]="drawing.content" [alt]="drawing.name" [className]="getPosition(drawing)" (click)="selectImage(drawing)" />
+                    <button id="delete-button" #deleteBtn mat-icon-button (click)="delete(drawing)" title="Supprimer ce dessin">
+                        <mat-icon style="font-size: x-large">{{ deleteBtnIcon }}</mat-icon>
+                    </button>
+                </div>
+                <ng-template #peripheral>
+                    <img
+                        [src]="drawing.content"
+                        [alt]="drawing.name"
+                        height="250px"
+                        width="250px"
+                        [className]="getPosition(drawing)"
+                        (click)="selectImage(drawing)"
+                    />
+                </ng-template>
+            </ng-container>
+            <a class="next" (click)="forward()">&#10095;</a>
+        </div>
+        <ng-container *ngFor="let drawing of displayDrawings">
+            <div *ngIf="getPosition(drawing) === 'center'" class="drawing-properties">
+                <div><span class="subtitle">Nom du dessin:</span> {{ drawing.name }}</div>
+                <div>
+                    <span class="subtitle">Étiquette(s): </span>
+                    <span style="cursor: pointer" *ngFor="let tag_i of drawing.tags" (click)="addTag(tag_i)">{{ tag_i }} </span>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+</ng-template>
+<ng-template #noDrawing>
+    <p class="subtitle" style="text-align: center">Il n'y a aucun dessin à afficher!</p>
+</ng-template>
+<form class="modal-content" *ngIf="!waitingForData">
+    <mat-form-field class="example-full-width">
+        <mat-label><mat-icon>filter_alt</mat-icon> Filtrer par étiquette</mat-label>
+        <input matInput type="text" #tagInput [matChipInputFor]="chipList" (matChipInputTokenEnd)="addTag($event.value)" />
+    </mat-form-field>
+    <mat-chip-list
+        #chipList
+        style="display: inline-block; max-width: 725px; overflow-x: scroll; overflow-y: hidden; white-space: nowrap; transform: translate(10px, 10px)"
+    >
+        <div id="tags-container">
+            <mat-chip style="display: inline-block" *ngFor="let element of filters" (removed)="removeTag(element)">
+                {{ element }}
+                <mat-icon matChipRemove class="cancel-input">cancel</mat-icon>
+            </mat-chip>
+            <br />
+        </div>
+    </mat-chip-list>
+</form>

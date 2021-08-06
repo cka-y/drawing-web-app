@@ -1,0 +1,13 @@
+<div style="position: relative">
+  <mat-icon style="display:inline-block; vertical-align: middle; transform: rotate(45deg)">horizontal_rule</mat-icon>  Largeur du trait
+    <div class="property-value">{{ lineWidth }} px</div>
+    <mat-slider
+        name="line-width"
+        thumbLabel
+        [tickInterval]="tickInterval"
+        [min]="min"
+        [max]="max"
+        [(ngModel)]="lineWidth"
+        (ngModelChange)="onLineWidthChange()"
+    ></mat-slider>
+</div>

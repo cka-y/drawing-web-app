@@ -1,0 +1,55 @@
+<div
+    #selectionBox
+    class="selection-box-preview"
+    [style.width.px]="selectorService.box.width"
+    [style.height.px]="selectorService.box.height"
+    [style.top.px]="selectorService.box.top"
+    [style.left.px]="selectorService.box.left"
+    (mousedown)="onMouseDown($event)"
+    (mouseup)="onMouseUp($event)"
+>
+    <canvas #selectionCanvas class="selection-canvas"></canvas>
+</div>
+<app-control-point
+    [properties]="selectorService.controlPointsData[0]"
+    (positionChange)="selectorService.controlPointsData[0].position = $event; selectorService.onTopLeftPositionChange($event)"
+    (movement)="controlPointMovement = $event"
+    [movementChange]="controlPointMovement"
+></app-control-point>
+<app-control-point
+    [properties]="selectorService.controlPointsData[1]"
+    (movement)="controlPointMovement = $event"
+    [movementChange]="controlPointMovement"
+></app-control-point>
+<app-control-point
+    [properties]="selectorService.controlPointsData[2]"
+    (movement)="controlPointMovement = $event"
+    [movementChange]="controlPointMovement"
+></app-control-point>
+<app-control-point
+    [properties]="selectorService.controlPointsData[3]"
+    (movement)="controlPointMovement = $event"
+    [movementChange]="controlPointMovement"
+></app-control-point>
+<app-control-point
+    [properties]="selectorService.controlPointsData[4]"
+    (movement)="controlPointMovement = $event"
+    [movementChange]="controlPointMovement"
+></app-control-point>
+<app-control-point
+    [properties]="selectorService.controlPointsData[5]"
+    (movement)="controlPointMovement = $event"
+    [movementChange]="controlPointMovement"
+></app-control-point>
+<app-control-point
+    [properties]="selectorService.controlPointsData[6]"
+    (movement)="controlPointMovement = $event"
+    [movementChange]="controlPointMovement"
+></app-control-point>
+<app-control-point
+    [properties]="selectorService.controlPointsData[7]"
+    [topLeftPosition]="selectorService.controlPointsData[0].position"
+    (movement)="controlPointMovement = $event"
+    [movementChange]="controlPointMovement"
+    (dimensionsChange)="selectionResizer.onDimensionsChange($event)"
+></app-control-point>

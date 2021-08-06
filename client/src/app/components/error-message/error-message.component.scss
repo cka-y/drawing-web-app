@@ -1,0 +1,32 @@
+$buttonColor: #DEA527;
+$textColor: white;
+$baseColor: black;
+$amount: 25;
+$backgroundColor: darken(#34568B, $amount);
+.section-header {
+    text-align: center;
+    color: $backgroundColor;
+    font-weight: bold;
+    letter-spacing: 6px;
+    padding: 10px 0;
+    margin: 10px 0;
+    font-size: large;
+    text-transform: uppercase;
+}
+#confirm-button {
+    color: $textColor;
+    background-color: $backgroundColor;
+    margin: 10px 0 0 0;
+    letter-spacing: 2px;
+}
+.error-icon {
+    cursor: pointer;
+    color: darkred;
+    vertical-align: middle;
+}
+
+.subtitle {
+    color: darken($backgroundColor, $amount);
+    font-weight: normal;
+    letter-spacing: 2px;
+}

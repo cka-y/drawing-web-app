@@ -1,0 +1,7 @@
+<div class="section-header"><mat-icon class="error-icon">error</mat-icon> Erreur</div>
+<div class="subtitle">
+    {{ errorHandler.errorMessage }}
+</div>
+<div style="width: 100%; display: flex; justify-content: center">
+    <button id="confirm-button" mat-raised-button (click)="errorHandler.onOkClick()">OK</button>
+</div>

@@ -1,0 +1,22 @@
+<app-line-width-property [(lineWidth)]="lineService.lineWidth" (lineWidthChange)="drawPreview()"></app-line-width-property>
+Type de jonction
+<br />
+<div class="trace-container" style="display: flex; justify-content: space-evenly">
+  <div [class]="lineService.junctionType === 'normal' ? 'selected-trace': 'trace'" (click)="lineService.junctionType = 'normal'; drawPreview()"  matTooltip="Remplissage seulement" matTooltipPosition="below">
+    <mat-icon [style.color]="colorService.getColor(0)" class="trace-type">show_chart</mat-icon>
+  </div>
+  <div [class]="lineService.junctionType !== 'normal' ? 'selected-trace': 'trace'" (click)="lineService.junctionType = 'point'; drawPreview()"  matTooltip="Contour seulement" matTooltipPosition="above">
+    <mat-icon [style.color]="colorService.getColor(0)" class="trace-type">timeline</mat-icon>
+  </div>
+</div>
+<br />
+
+<ng-container *ngIf="lineService.junctionType == 'point'">
+    <div style="position: relative">
+      <mat-icon style="vertical-align: middle">panorama_fish_eye</mat-icon> Diamètre de jonction
+        <div class="property-value">{{ lineService.junctionDiameter }} px</div>
+        <mat-slider name="point-d" thumbLabel tickInterval="1" min="5" max="30" [(ngModel)]="lineService.junctionDiameter" (ngModelChange)="drawPreview()"></mat-slider>
+    </div>
+</ng-container>
+Aperçu de la ligne
+<canvas class="tool-preview-drawing" #previewCanvas [height]="canvasSize" [width]="2*canvasSize"></canvas>

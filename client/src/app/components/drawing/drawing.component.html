@@ -1,0 +1,19 @@
+<div id="canvas-container">
+    <canvas style="background: white; z-index: 0"
+            [class]="toolManager.currentTool.name == 'Efface' || toolManager.currentTool.name == 'Étampe'? 'no-cursor' : 'crosshair-cursor'"
+            [attr.width]="canvasDimensions.width" [attr.height]="canvasDimensions.height"></canvas>
+    <canvas id="background"
+            #background
+            [class]="toolManager.currentTool.name == 'Efface' || toolManager.currentTool.name == 'Étampe'? 'no-cursor' : 'crosshair-cursor'"
+            ></canvas>
+    <canvas
+        id="canvas"
+        [class]="toolManager.currentTool.name == 'Efface' || toolManager.currentTool.name == 'Étampe'? 'no-cursor' : 'crosshair-cursor'"
+        #baseCanvas
+    ></canvas>
+    <canvas
+        id="previewLayer"
+        [class]="toolManager.currentTool.name == 'Efface' || toolManager.currentTool.name == 'Étampe' ? 'no-cursor' : 'crosshair-cursor'"
+        #previewCanvas
+    ></canvas>
+</div>

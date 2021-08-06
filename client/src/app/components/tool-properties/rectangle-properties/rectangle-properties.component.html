@@ -1,0 +1,21 @@
+<form>
+    <app-line-width-property [(lineWidth)]="rectangleService.lineWidth" (lineWidthChange)="drawPreview()"></app-line-width-property>
+  Type de tracé
+  <div class="trace-container" style="display: flex; justify-content: space-evenly">
+    <div #fill [class]="rectangleService.traceType === 'fill'? 'selected-trace':'trace'" (click)="traceType = 'fill'; drawPreview()"  matTooltip="Remplissage seulement" matTooltipPosition="below">
+      <mat-icon [style.color]="colorService.getColor(0)" class="trace-type">stop</mat-icon>
+    </div>
+    <div #line [class]="rectangleService.traceType === 'line'? 'selected-trace':'trace'" (click)="traceType = 'line'; drawPreview()"  matTooltip="Contour seulement" matTooltipPosition="above">
+      <mat-icon [style.color]="colorService.getColor(1)" class="trace-type">crop_square</mat-icon>
+    </div>
+    <div #both [class]="rectangleService.traceType === 'both'? 'selected-trace':'both'" class="trace" (click)="traceType='both'; drawPreview()" style="position: relative"
+         matTooltip="Contour et remplissage" matTooltipPosition="below">
+      <mat-icon [style.color]="colorService.getColor(1)" class="trace-type" style="font-size: 55px; position: absolute; top: -2.5px; left: -2.5px">crop_square</mat-icon>
+      <mat-icon [style.color]="colorService.getColor(0)" class="trace-type">stop</mat-icon>
+    </div>
+  </div>
+    <br />
+    <ng-container *ngIf="rectangleService.traceType !== 'fill'"> </ng-container>
+</form>
+Aperçu du rectangle
+<canvas class="tool-preview-drawing" #previewCanvas [height]="canvasSize" [width]="2*canvasSize"></canvas>

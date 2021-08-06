@@ -1,0 +1,20 @@
+<form>
+    <app-line-width-property [(lineWidth)]="ellipseService.lineWidth" (lineWidthChange)="drawPreview()"></app-line-width-property>
+    Type de tracé
+  <div class="trace-container" style="display: flex; justify-content: space-evenly">
+    <div #fill [class]="ellipseService.traceType === 'fill'? 'selected-trace':'trace'" (click)="traceType = 'fill'; drawPreview()"  matTooltip="Remplissage seulement" matTooltipPosition="below">
+      <mat-icon [style.color]="colorService.getColor(0)" class="trace-type">circle</mat-icon>
+    </div>
+    <div #line [class]="ellipseService.traceType === 'line'? 'selected-trace':'trace'" (click)="traceType = 'line'; drawPreview()"  matTooltip="Contour seulement" matTooltipPosition="above">
+      <mat-icon [style.color]="colorService.getColor(1)" class="trace-type">radio_button_unchecked</mat-icon>
+    </div>
+    <div #both [class]="ellipseService.traceType === 'both'? 'selected-trace':'both'" class="trace" (click)="traceType='both'; drawPreview()" style="position: relative"
+         matTooltip="Contour et remplissage" matTooltipPosition="below">
+      <mat-icon [style.color]="colorService.getColor(0)" class="trace-type" style="font-size: 35px; position: absolute; top: 7.5px; left: 7.5px">circle</mat-icon>
+      <mat-icon [style.color]="colorService.getColor(1)" class="trace-type">radio_button_unchecked</mat-icon>
+    </div>
+  </div>
+    <br />
+</form>
+Aperçu de l'ellipse
+<canvas class="tool-preview-drawing" #previewCanvas [height]="canvasSize" [width]="2*canvasSize"></canvas>

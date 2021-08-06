@@ -1,0 +1,122 @@
+$emphasis: #34568B;
+$buttonColor: #34568B;
+$textColor: white;
+$baseColor: black;
+$amount: 25;
+$backgroundColor: darken(#34568B, $amount);
+#imagePreview {
+    float: left;
+    border: 0.2em solid $backgroundColor;
+    position: absolute;
+}
+.input-requirements {
+    font-size: small;
+    position: relative;
+    width: 100%;
+    color: #4e4c4c;
+    letter-spacing: 0.04em;
+    margin-bottom: 5px;
+}
+.image-label-prev {
+    position: absolute;
+    top: 100px;
+    left: 2px;
+    padding: 3px;
+    background-color: $emphasis;
+    color: white;
+    letter-spacing: 1px;
+}
+b {
+    font-weight: lighter;
+}
+#tags-container {
+    min-height: 0;
+    max-height: 145px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $backgroundColor;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: darken($backgroundColor, $amount);
+}
+
+.form-container {
+    float: left;
+    width: 25%;
+}
+
+.mat-chip {
+    color: darken($backgroundColor, $amount) !important;
+}
+
+.cancel-input {
+    position: absolute;
+    right: 10px;
+}
+
+::ng-deep .mat-progress-spinner circle,
+::ng-deep .mat-spinner circle {
+    stroke: $emphasis !important;
+}
+.section-header {
+    text-align: center;
+    color: $emphasis;
+    font-weight: bold;
+    letter-spacing: 21px;
+    padding: 10px 0;
+    margin: 30px 0;
+    font-size: large;
+    text-transform: uppercase;
+    border-radius: 20%;
+}
+
+.modal-content {
+    float: right;
+    padding: 10px;
+    margin: -10px;
+}
+
+::ng-deep .mat-form-field-underline,
+::ng-deep .mat-form-field-ripple {
+    background-color: $backgroundColor !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    color: $backgroundColor !important;
+}
+
+#confirm-button {
+    color: $textColor;
+    background-color: $backgroundColor;
+    margin: 20px 0 0 0;
+    letter-spacing: 2px;
+}
+
+#check {
+    color: green;
+    font-weight: bolder;
+    font-size: xx-large;
+    position: relative;
+    top: 10px;
+    left: -10px;
+}
+.subtitle {
+    color: darken($backgroundColor, $amount);
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+

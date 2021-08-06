@@ -1,0 +1,17 @@
+<div class="stamps-container">
+  Choix d'étampe<br/>
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center">
+        <canvas [classList]="stampService.selectedStamp === stamp?'selected-stamp':''" *ngFor="let stamp of stamps" height="25" width="25" #stamp (click)="selectStamp(stamp)"></canvas>
+  </div>
+</div>
+<br/>
+<form style="position: relative">
+  <mat-icon style="vertical-align: middle">aspect_ratio</mat-icon>  Taille de l'étampe
+  <mat-slider name="stamp-size" style="width: 100%" thumbLabel tickInterval="1" step="5" min="20" max="300" [(ngModel)]="stampService.fontSize" (ngModelChange)="stampService.setStampStyle()"></mat-slider>
+  <div class="property-value">{{stampService.fontSize}} px</div>
+</form>
+<form style="position: relative">
+  <mat-icon style="vertical-align: middle">text_rotation_angledown</mat-icon> Angle de rotation
+  <mat-slider name="rotation-angle" style="width: 100%" thumbLabel tickInterval="1" step="1" min="0" max="360" [(ngModel)]="stampService.rotationAngle"></mat-slider>
+  <div class="property-value">{{stampService.rotationAngle}}°</div>
+</form>

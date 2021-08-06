@@ -1,0 +1,18 @@
+<div id="sect1" class="container">
+    <div id="title" class="block-effect header-item" style="--td: 1.2s">
+        <div class="block-reveal" style="--bc: #DEA527; --d: 0.1s"></div>
+        <img src="assets/logo-1.png" alt="logo" />
+        <div class="block-reveal" style="--bc: #DEA527; --d: 0.1s"></div>
+    </div>
+    <div id="buttons-container">
+        <button class="button" routerLink="/editor" (click)="createNewDrawing()">
+          <mat-icon style="vertical-align: middle">add</mat-icon> Créer un nouveau dessin
+        </button>
+        <button class="button" (click)="openCarousel()">
+          <mat-icon style="vertical-align: middle">view_carousel</mat-icon> Ouvrir le carrousel de dessin
+        </button>
+        <button class="button" [disabled]="!isDrawingSaved() || (drawingService.baseCtx && drawingService.isCanvasBlank())" routerLink="/editor" onclick="">
+          <mat-icon style="vertical-align: middle">keyboard_tab</mat-icon> Continuer un dessin
+        </button>
+    </div>
+</div>

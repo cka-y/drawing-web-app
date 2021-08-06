@@ -1,0 +1,9 @@
+<button #copy matTooltip="Copier la selection courrante" [matTooltipDisabled]="copy.disabled" mat-raised-button class="selection-opt" (mousedown)="$event.stopImmediatePropagation(); clipboardService.copy()" style=" width: 200px;" [disabled]="clipboardService.selector.image === undefined">
+  <span aria-hidden="true" style="pointer-events: none"><mat-icon class="selection-opt" style="vertical-align: middle">content_copy</mat-icon> Copier</span>
+</button>
+<button class="selection-opt" matTooltip="Couper la selection courrante" [matTooltipDisabled]="copy.disabled" mat-raised-button (mousedown)="$event.stopImmediatePropagation(); clipboardService.cut()" style=" width: 200px;"  [disabled]="clipboardService.selector.image === undefined">
+  <mat-icon class="selection-opt" style="vertical-align: middle; transform: rotate(90deg)">content_cut</mat-icon> Couper
+</button>
+<button class="selection-opt" matTooltip="Supprimer la selection courrante" [matTooltipDisabled]="copy.disabled" mat-raised-button (mousedown)="$event.stopImmediatePropagation(); clipboardService.delete()" style=" width: 200px;"  [disabled]="clipboardService.selector.image === undefined">
+  <mat-icon class="selection-opt" style="vertical-align: middle">delete_forever</mat-icon> Supprimer
+</button>

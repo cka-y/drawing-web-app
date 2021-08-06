@@ -1,0 +1,80 @@
+$buttonColor: #eae7dc;
+$textColor: white;
+$baseColor: black;
+$amount: 25;
+$emphasis: #34568B;
+$backgroundColor: darken(#34568B, $amount);
+::ng-deep .mat-form-field-underline,
+::ng-deep .mat-form-field-ripple {
+    background-color: $backgroundColor !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    color: $backgroundColor !important;
+}
+#confirm-button {
+    color: $textColor;
+    background-color: $backgroundColor;
+    margin: 30px 10px 0 0;
+    letter-spacing: 2px;
+    position: relative;
+    width: 250px;
+}
+#imagePreview {
+    float: left;
+    border: 0.2em solid $backgroundColor;
+    background-color: white;
+}
+.padding-right {
+    padding-right: 10px;
+}
+
+button:disabled {
+    cursor: not-allowed !important;
+}
+.section-header {
+    text-align: center;
+    color: $emphasis;
+    font-weight: bold;
+    letter-spacing: 21px;
+    padding: 10px 0;
+    margin: 30px 0;
+    font-size: large;
+    text-transform: uppercase;
+    border-radius: 20%;
+}
+.modal-content {
+    float: right;
+    padding: 30px;
+    margin: 10px;
+}
+
+.subtitle {
+    color: darken($backgroundColor, $amount);
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: $backgroundColor;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    color: darken($backgroundColor, $amount);
+    background-color: $emphasis;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color: lighten($backgroundColor, $amount);
+}
+
+.block-display {
+    display: block;
+    padding: 5px 0;
+}
+
+#filters-container {
+    margin-top: 25px;
+    border-top: 1px solid lighten($backgroundColor, $amount);
+    border-bottom: 1px solid lighten($backgroundColor, $amount);
+}

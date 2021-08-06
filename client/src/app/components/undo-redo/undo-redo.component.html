@@ -1,0 +1,6 @@
+<button mat-icon-button [disabled]="!actionManager.isUndoPossible()" class="tool-selector" (click)="$event.stopImmediatePropagation(); actionManager.undo()">
+    <mat-icon matTooltip="Annuler (raccourci: Ctrl + Z)">undo</mat-icon>
+</button>
+<button mat-icon-button [disabled]="!actionManager.isRedoPossible()" class="tool-selector" (click)="$event.stopImmediatePropagation(); actionManager.redo()">
+    <mat-icon matTooltip="Refaire (raccourci: Ctrl + Shift + Z)">redo</mat-icon>
+</button>

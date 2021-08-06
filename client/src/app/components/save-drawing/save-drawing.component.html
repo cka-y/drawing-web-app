@@ -1,0 +1,93 @@
+<div class="section-header" *ngIf="saveDrawingService.savingState !== 2">Sauvegarder sur le serveur</div>
+<ng-container *ngIf="saveDrawingService.savingState === 0">
+    <br />
+    <div>
+        <form class="modal-content" style="display: flex;flex-direction: column;width: 53%;">
+            <mat-form-field class="example-full-width">
+                <mat-label>Nom du dessin</mat-label>
+                <input
+                    required
+                    type="text"
+                    #nameInput
+                    matInput
+                    [maxLength]="12"
+                    [(ngModel)]="saveDrawingService.drawingName"
+                    name="drawingName"
+                    (focus)="nameFocusState = true"
+                    (focusout)="nameFocusState = false"
+                    (change)="$event.stopPropagation()"
+                />
+            </mat-form-field>
+            <div class="input-requirements" *ngIf="nameFocusState">
+                Nombre de caractères: <span style="position: absolute; right: 0">{{ nameInput.value?.length || 0 }}/12 </span><br />
+            </div>
+            <br />
+            <mat-form-field class="example-full-width">
+                <mat-label><mat-icon>sell</mat-icon> Étiquettes(s) associée(s)</mat-label>
+                <input
+                    #labelInput
+                    type="text"
+                    [maxLength]="12"
+                    matInput
+                    [matChipInputFor]="chipList"
+                    (matChipInputTokenEnd)="add($event.value)"
+                    (focus)="tagInputFocusState = true"
+                    (focusout)="tagInputFocusState = false"
+                />
+            </mat-form-field>
+            <div class="input-requirements" *ngIf="tagInputFocusState">
+                Nombre de caractères: <span style="position: absolute; right: 0">{{ labelInput.value?.length || 0 }}/12 </span><br />
+                <span [style.color]="labelInput.value?.indexOf(' ') > -1 ? '#DEA527' : ''">Aucun espace</span
+                ><mat-icon style="position: absolute; right: 0" [style.color]="labelInput.value?.indexOf(' ') > -1 ? '#bf9216' : ''">
+                    {{ labelInput.value?.indexOf(' ') > -1 ? 'warning' : 'check' }}
+                </mat-icon>
+            </div>
+            <mat-chip-list #chipList>
+                <div id="tags-container">
+                    <mat-chip style="display: block" *ngFor="let element of saveDrawingService.drawingTags" (removed)="remove(element)">
+                        {{ element }}
+                        <mat-icon matChipRemove class="cancel-input">cancel</mat-icon>
+                    </mat-chip>
+                    <br />
+                </div>
+            </mat-chip-list>
+        </form>
+        <div style="position: relative" [style.width.px]="imgDimension" [style.height.px]="imgDimension">
+            <img
+                id="imagePreview"
+                [src]="saveDrawingService.drawingPreview"
+                alt="Prévisualisation du dessin"
+                [height]="imgDimension"
+                [width]="imgDimension"
+            />
+            <div class="image-label-prev" [style.width.px]="imgDimension - 50">
+                <b>Nom du dessin :</b> {{ nameInput.value || '' }}<br />
+                <b>Nombre de tags associés au dessin :</b> {{ saveDrawingService.drawingTags.size || 0 }}
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%; display: flex; justify-content: center">
+        <button
+            id="confirm-button"
+            mat-raised-button
+            (click)="saveDrawingService.isNameDefined() ? saveDrawing() : ''"
+            matTooltip="Le nom du dessin n'est pas spécifié."
+            matTooltipPosition="right"
+            [matTooltipDisabled]="saveDrawingService.isNameDefined()"
+            [style.cursor]="saveDrawingService.isNameDefined() ? 'pointer': 'not-allowed'"
+        >
+          <mat-icon>save</mat-icon> Sauvegarder
+        </button>
+    </div>
+</ng-container>
+<ng-container id="onServerSaving" *ngIf="saveDrawingService.savingState === 1">
+    <br />
+    <mat-spinner style="margin: 0 auto"></mat-spinner>
+</ng-container>
+
+<ng-container *ngIf="saveDrawingService.savingState === 2">
+    <span><mat-icon id="check">check_circle</mat-icon> Le dessin a été correctement sauvegardé sur le serveur.</span>
+</ng-container>
+<div *ngIf="saveDrawingService.savingState === 3" class="subtitle" style="text-align: center">
+    <br />Une erreur s'est produite lors de la sauvegarde. Veuillez réessayer ultérieurement.
+</div>

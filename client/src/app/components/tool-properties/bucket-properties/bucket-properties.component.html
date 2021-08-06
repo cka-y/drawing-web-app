@@ -1,0 +1,17 @@
+<form style="position: relative">
+  <mat-icon style="display:inline-block; vertical-align: middle">gradient</mat-icon> Tolérance
+  <mat-slider name="tolerance-value" thumbLabel step="1" min="0" max="100" [(ngModel)]="bucketService.tolerance"></mat-slider>
+  <div class="property-value">{{ bucketService.tolerance }} %</div>
+</form>
+<div style="position: relative">
+  <mat-icon style="display:inline-block; vertical-align: middle">format_painter</mat-icon> Remplissage
+  <div class="property-value"> <mat-icon style="display:inline-block; vertical-align: middle; padding: 2px; border: 1px solid black" [style.color]="colorService.getColor(0)">stop</mat-icon></div>
+</div>
+<br>
+<div style="position: relative">
+  <mat-icon style="display:inline-block; vertical-align: middle">gps_fixed</mat-icon> Destination
+  <div class="property-value"> <mat-icon style="display:inline-block; vertical-align: middle; padding: 2px; border: 1px solid black" [style.color]="printColor(bucketService.targetColor)">stop</mat-icon></div>
+</div>
+<div style="color: grey; font-size: smaller; margin-top: 20px; text-align: justify-all">
+  <span><mat-icon style="display:inline-block; vertical-align: middle;">info</mat-icon> Le niveau de tolérance ne prend pas en considération l'écart d'opacité.</span>
+</div>

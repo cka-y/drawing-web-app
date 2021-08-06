@@ -1,0 +1,108 @@
+//<!--Code inspired by Lukas Marx "Creating a Color Picker Component with Angular" at https://malcoded.com/posts/angular-color-picker/ -->
+
+$backgroundColor: #34568B;
+$textColor: #dea527;
+*{
+  color: $textColor;
+}
+input{
+  color: black;
+  text-align: center;
+}
+:host {
+    display: block;
+    width: 316px;
+    padding: 16px;
+}
+.color-wrapper {
+    display: flex;
+    height: 250px;
+}
+app-color-palette{
+  canvas.color-palette{
+    border-radius: 5%;
+    margin-right: 2px;
+  }
+}
+.input-wrapper {
+    margin-top: 16px;
+    display: flex;
+    border-radius:25%;
+    border: 1px solid rgb(220, 220, 220);
+    padding: 8px;
+    height: 32px;
+    justify-content: center;
+}
+
+.color-div {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgb(220, 220, 220);
+}
+
+.text {
+    flex: 1;
+    font-family: 'Helvetica', serif;
+    line-height: 32px;
+}
+app-color-palette,
+app-color-slider {
+    float: left;
+    display: inline;
+}
+
+.rgb-wrapper {
+    display: flex;
+    float: left;
+    width: 100%;
+    height: 70px;
+}
+.input-error {
+    border: red solid 1px;
+}
+.input-valid {
+    border: 1px solid transparent;
+}
+.rgb-input {
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    border: 1px solid $textColor;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    width: 100%;
+    background-color: $textColor;
+    color: black;
+    height: 30px;
+    border: none;
+    margin: 10px 0;
+    cursor: pointer;
+}
+button:hover {
+    background-color: darken($textColor, 20);
+}
+.color-preview {
+    margin: 10px 0 20px 0;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    border: 1px solid $textColor;
+}
+
+.opacity-slider ::ng-deep .mat-accent .mat-slider-track-fill,
+.opacity-slider ::ng-deep .mat-accent .mat-slider-thumb,
+.opacity-slider ::ng-deep .mat-accent .mat-slider-thumb-label{
+  background-color: $textColor !important;
+  color: black !important;
+}
+
+#opacity-slider, .opacity-slider{
+  width: 100%;
+}
+mat-slider{
+  width: 100%;
+}
